@@ -11,6 +11,11 @@ Fetaures include-
 
 4.Persisted Storage of data
 
+
+Points to Note:-
+1.Db 6470 needs to be present beforehand\n
+2.Table 6470exerciseusers schema should be present before hand
+
 to run:
 
 docker-compose up -d
