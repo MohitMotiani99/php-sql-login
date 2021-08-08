@@ -13,7 +13,8 @@ Fetaures include-
 
 
 Points to Note:-
-1.Db 6470 needs to be present beforehand\n
+1.Db 6470 needs to be present beforehand
+
 2.Table 6470exerciseusers schema should be present before hand
 
 to run:
