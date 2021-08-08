@@ -3,6 +3,7 @@ PHP SQL login with persisted storage
 
 Fetaures include-
 
+
 1.User Registeration
 
 2.User Login
@@ -13,11 +14,15 @@ Fetaures include-
 
 
 Points to Note:-
+
+
 1.Db 6470 needs to be present beforehand
 
 2.Table 6470exerciseusers schema should be present before hand
 
+
 to run:
+
 
 docker-compose up -d
 
