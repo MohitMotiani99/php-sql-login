@@ -10,25 +10,15 @@ if($mysqli->connect_error){
 	if (isset($_POST['submit_login'])){
 		$uname=$_POST['uname'];
 		$pass=$_POST['pass'];
-		//echo $uname."        ".$pass;
-
-		//$sql_1="select * from 6470exerciseusers";
-		//$result=$mysqli->query($sql_1);
-		// if($result){
-		// 	while ($data=$result->fetch_object()) {
-		// 		echo $data->username;
-		// 	}
-		// }
-
+		
 		$sql = "SELECT * FROM 6470exerciseusers where username=\"".$uname."\" and password=\"".$pass."\"";
-		//echo $sql;
 		$result = $mysqli->query($sql);
-		//echo $result;
+		
 		$cnt=0;
 		while ($data=$result->fetch_object()) {
-		 		$cnt=$nt+1;
+		 		$cnt=$cnt+1;
 		}
-		if ($cnt>0) {
+		if ($cnt==1) {
 			echo $uname." has Logged In Successfully";
 			
 		}
@@ -37,29 +27,19 @@ if($mysqli->connect_error){
 		}
 
 	}
-	if (isset($_POST['submit_register'])){
+	else if (isset($_POST['submit_register'])){
 		$uname=$_POST['uname'];
 		$pass=$_POST['pass'];
 		$phone=$_POST['phone'];
-		//echo $uname."        ".$pass;
-
-		//$sql_1="select * from 6470exerciseusers";
-		//$result=$mysqli->query($sql_1);
-		// if($result){
-		// 	while ($data=$result->fetch_object()) {
-		// 		echo $data->username;
-		// 	}
-		// }
 
 		$sql = "SELECT * FROM 6470exerciseusers where username=\"".$uname."\"";
-		//echo $sql;
 		$result = $mysqli->query($sql);
-		//echo $result;
+
 		$cnt=0;
 		while ($data=$result->fetch_object()) {
-		 		$cnt=$nt+1;
+		 		$cnt=$cnt+1;
 		}
-		if ($cnt>0) {
+		if ($cnt==1) {
 			echo "Username is Taken";
 			
 		}
@@ -67,6 +47,60 @@ if($mysqli->connect_error){
 			$sql="INSERT INTO 6470exerciseusers(USERNAME,PASSWORD,PHONE) VALUES(\"".$uname."\",\"".$pass."\",\"".$phone."\")";
 			$mysqli->query($sql);
 			echo "USER REGISTERED,Its Details are NAME: ".$uname." and PHONE NUMBER: ".$phone;
+		}
+
+	}
+	else if (isset($_POST['submit_rp'])){
+		$uname=$_POST['uname2'];
+		$pass=$_POST['pass2'];
+		$newp=$_POST['newp'];
+
+		$sql = "SELECT * FROM 6470exerciseusers where username=\"".$uname."\" and password=\"".$pass."\"";
+		$result = $mysqli->query($sql);
+
+		$cnt=0;
+		while ($data=$result->fetch_object()) {
+		 		$cnt=$cnt+1;
+		}
+		if ($cnt==1) {
+			//echo "Username Found";
+			//echo "IN here";
+			//echo $newp;
+				//echo "In update";
+				$sql="UPDATE 6470exerciseusers SET password=\"".$newp."\" WHERE username=\"".$uname."\" and password=\"".$pass."\"";
+				$mysqli->query($sql);
+				
+				echo "Password Updated";
+
+		}
+		else{
+			
+			echo "User Not Found";
+		}
+
+	}
+	else if (isset($_POST['submit_fp'])){
+		$uname=$_POST['uname3'];
+		$phone=$_POST['phone2'];
+
+		$sql = "SELECT * FROM 6470exerciseusers where username=\"".$uname."\" and phone=\"".$phone."\"";
+		$result = $mysqli->query($sql);
+
+		$cnt=0;
+		while ($data=$result->fetch_object()) {
+		 		$cnt=$cnt+1;
+		}
+		if ($cnt==1) {
+				$newp=rand(10000,99999);
+				$sql="UPDATE 6470exerciseusers SET password=\"".$newp."\" WHERE username=\"".$uname."\" and phone=\"".$phone."\"";
+				$mysqli->query($sql);
+				
+				echo "Password Set to ".$newp." Use the Reset Password Feature for better usage of the account";
+
+		}
+		else{
+			
+			echo "User Not Found";
 		}
 
 	}
@@ -88,6 +122,41 @@ if($mysqli->connect_error){
 	<input type="text" name="phone" id="phone">
 	<br>
 	<input type="submit" name="submit_register" value="Register">
+	<br>
+	<br>
+	<br>
+	<br>
+	<hr>
+	<hr>
+	Change Password
+	<br>
+	<label for="uname2">Enter User Name:</label>
+	<input type="text" name="uname2" id="uname2">
+	<br>
+	<label for="pass2">Enter Current Password:</label>
+	<input type="password" name="pass2" id="pass2">
+	<br>
+	<label for="newp">Enter New Password:</label>
+	<input type="password" name="newp" id="newp">
+	<br>
+	<input type="submit" name="submit_rp" value="Update Password" >
+	<br>
+	<br>
+	<br>
+	<br>
+	<br>
+	<hr>
+	<hr>
+	Forgot Password
+	<br>
+	<label for="uname3">Enter User Name:</label>
+	<input type="text" name="uname3" id="uname3">
+	<br>
+	<label for="phone2">Enter Phone Number:</label>
+	<input type="text" name="phone2" id="phone2">
+	<br>
+	<input type="submit" name="submit_fp" value="Forgot Password">
+
 	<br>
 
 </form>
